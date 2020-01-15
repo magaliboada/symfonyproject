@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>{% block title %}Welcome!{% endblock %}</title>
+	{% block stylesheets %}{% endblock %}
+	</head>
+	<body>
+		<ul>
+			<li class="col-sm-3">Menu0</li>
+			<li class="col-sm-3">Menu1</li>
+			<li class="col-sm-3">Menu2</li>
+		</ul>
+		{% block body %}{% endblock %}
+		{% block javascripts %}{% endblock %}
+
+	<footer>
+		© 2019 Magalí. All Rights Reserved.
+	</footer>
+	</body>
+</html>
+
+<style>
+.col-sm-3 {
+	width: 33%;
+	display: inline-block;
+}
+
+footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: darkgrey;
+	color: white;
+	text-align: center;
+}
+</style>
