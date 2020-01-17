@@ -10,13 +10,24 @@ use Symfony\Component\Routing\Annotation\Route;
 class ClothingController extends AbstractController
 {
     /**
-     * @Route("/clothing", name="clothing")
+     * @Route("/clothing/index", name="index")
      */
     public function index()
     {
-        return $this->render('clothing/index.html.twig', [
-            'controller_name' => 'ClothingController',
-        ]);
+        $repository = $this->getDoctrine()
+            ->getRepository(Clothing::class);
+        $clothings = $repository->findAll();
+
+        //        var_dump($products);
+
+        if (!$clothings) {
+            throw $this->createNotFoundException(
+                'No clothing found.'
+            );
+        }
+        //        return new Response('Check out this great product: ');
+
+        return $this->render('clothing/show_all.html.twig', ['clothings' => $clothings]);
     }
 
     /**
@@ -27,7 +38,8 @@ class ClothingController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
 
         $product = new Clothing();
-        $product->setPrice(19.99);
+        $product->setPrice(5.0);
+        $product->setSize("XS");
 
         $entityManager->persist($product);
 

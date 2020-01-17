@@ -11,13 +11,16 @@
     <div class="example-wrapper">
         <h1>Hello ! ✅</h1>
 
-        This friendly message is coming from:
-        <ul>
-            {% for product in products %}
+        <div class="row">
+            {% for clothing in clothings %}
                 <div class="col-sm-3">
-                    <li>{{ product.type.name|e }}</li>
+                <li>
+                    {{ clothing.size|e }}
+                    {{ clothing.price|e }}
+
+                </li>
                 </div>
             {% endfor %}
-        </ul>
+        </div>
     </div>
 {% endblock %}

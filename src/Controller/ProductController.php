@@ -23,12 +23,9 @@ class ProductController extends AbstractController
 
         if (!$products) {
             throw $this->createNotFoundException(
-                'No product found for id '
+                'No products found.'
             );
         }
-
-        $repository->findAllGreaterThanPrice(1);
-
 //        return new Response('Check out this great product: ');
 
          return $this->render('product/show_all.html.twig', ['products' => $products]);

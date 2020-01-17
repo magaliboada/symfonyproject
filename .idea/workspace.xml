@@ -2,25 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e2236112-3397-4be4-99b8-af62c0bb9612" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Entity/Clothing.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/ClothingRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/ClothingTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/ProductTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/clothing/show_all.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/symfonyProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/symfonyProject.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ClothingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ClothingController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ProductTypeController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Fabric.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/ProductCategory.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/ProductCategory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/ProductType.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200116091113.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200116091427.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200116125025.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20200116125234.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/FabricRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/ProductRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/ProductRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/ProductTypeRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/InitialPageTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Image.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Image.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/product/show_all.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product/show_all.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/ClothingTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/ClothingTest.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -169,6 +163,7 @@
       <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
       <path value="$PROJECT_DIR$/vendor/phar-io/version" />
       <path value="$PROJECT_DIR$/vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/vendor/twbs/bootstrap" />
     </include_path>
   </component>
   <component name="ProjectId" id="1Srxq7BDAhdsQwAXuDBtbQhdBnN" />
@@ -238,7 +233,7 @@
       <workItem from="1572335704229" duration="9431000" />
       <workItem from="1573122627968" duration="667000" />
       <workItem from="1579099466322" duration="6019000" />
-      <workItem from="1579160080851" duration="31743000" />
+      <workItem from="1579160080851" duration="36683000" />
     </task>
     <servers />
   </component>
