@@ -27,10 +27,10 @@ class ProductController extends AbstractController
             );
         }
 
+        $repository->findAllGreaterThanPrice(1);
+
 //        return new Response('Check out this great product: ');
 
-        // or render a template
-        // in the template, print things with {{ product.name }}
          return $this->render('product/show_all.html.twig', ['products' => $products]);
     }
 
@@ -67,10 +67,6 @@ class ProductController extends AbstractController
         }
 
         return new Response('Check out this great product: '.$product->getType()->getName());
-
-        // or render a template
-        // in the template, print things with {{ product.name }}
-        // return $this->render('product/show.html.twig', ['product' => $product]);
     }
 
     /**
@@ -78,8 +74,6 @@ class ProductController extends AbstractController
      */
     public function createProduct(): Response
     {
-        // you can fetch the EntityManager via $this->getDoctrine()
-        // or you can add an argument to the action: createProduct(EntityManagerInterface $entityManager)
         $entityManager = $this->getDoctrine()->getManager();
 
         $product = new Product();
@@ -88,10 +82,8 @@ class ProductController extends AbstractController
         $product->setType($type);
         $product->setPrice(19.99);
 
-        // tell Doctrine you want to (eventually) save the Product (no queries yet)
         $entityManager->persist($product);
 
-        // actually executes the queries (i.e. the INSERT query)
         $entityManager->flush();
 
         return new Response('Saved new product with id '.$product->getId());

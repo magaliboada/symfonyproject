@@ -21,10 +21,6 @@ class ProductCategory
      */
     private $name;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\ProductType", mappedBy="category", cascade={"persist", "remove"})
-     */
-    private $productType;
 
     public function getId(): ?int
     {
@@ -39,23 +35,6 @@ class ProductCategory
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getProductType(): ?ProductType
-    {
-        return $this->productType;
-    }
-
-    public function setProductType(ProductType $productType): self
-    {
-        $this->productType = $productType;
-
-        // set the owning side of the relation if necessary
-        if ($productType->getCategory() !== $this) {
-            $productType->setCategory($this);
-        }
 
         return $this;
     }

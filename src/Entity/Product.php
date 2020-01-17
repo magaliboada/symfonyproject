@@ -2,9 +2,15 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\InheritanceType;
+use phpDocumentor\Reflection\Types\Float_;
+use phpDocumentor\Reflection\Types\Integer;
 
 /**
+ * @InheritanceType("JOINED")
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
  */
 class Product
@@ -17,36 +23,30 @@ class Product
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ProductType", inversedBy="products")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $type;
-
-    /**
      * @ORM\Column(type="float", nullable=true)
      */
     private $price;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Fabric", inversedBy="products")
+     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="product")
      */
-    private $fabric;
+    private $images;
+
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     * @param Float $price
+     */
+
+    public function __construct(Float $price = 0)
+    {
+        $this->setPrice($price);
+        $this->images = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getType(): ?ProductType
-    {
-        return $this->type;
-    }
-
-    public function setType(?ProductType $type): self
-    {
-        $this->type = $type;
-
-        return $this;
     }
 
     public function getPrice(): ?float
@@ -61,15 +61,35 @@ class Product
         return $this;
     }
 
-    public function getFabric(): ?Fabric
+    /**
+     * @return Collection|Image[]
+     */
+    public function getImages(): Collection
     {
-        return $this->fabric;
+        return $this->images;
     }
 
-    public function setFabric(?Fabric $fabric): self
+    public function addImage(Image $image): self
     {
-        $this->fabric = $fabric;
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setProduct($this);
+        }
 
         return $this;
     }
+
+    public function removeImage(Image $image): self
+    {
+        if ($this->images->contains($image)) {
+            $this->images->removeElement($image);
+            // set the owning side to null (unless already changed)
+            if ($image->getProduct() === $this) {
+                $image->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
 }
