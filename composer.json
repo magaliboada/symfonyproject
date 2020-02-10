@@ -3,6 +3,11 @@
     "license": "proprietary",
     "require": {
         "php": "^7.2.5",
+        "silex/silex": "~1.0@dev",
+        "chh/cache-service-provider": "~1.0",
+        "ext-libevent": "*",
+        "ext-curl": "*",
+        "ext-sundown": "*",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "phpunit/phpunit": "^8.5",
@@ -81,6 +86,23 @@
         "symfony": {
             "allow-contrib": false,
             "require": "5.0.*"
+        },
+        "heroku": {
+            "document-root": "web",
+            "index-document": "index.php",
+            "php-config": [
+                "short_open_tag=on",
+                "date.timezone=Europe/Vienna",
+                "newrelic.appname=php-test"
+            ],
+            "engines": {
+                "php": "5.5.*",
+                "nginx": "1.4.*"
+            },
+            "compile": [
+                "echo $FOO"
+            ],
+            "newrelic": true
         }
     }
 }
