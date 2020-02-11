@@ -22,10 +22,9 @@ class ProductTest extends \PHPUnit\Framework\TestCase
      */
     public function testProductEntity()
     {
-        $product = new Product(10.2, new ProductType('test', new ProductCategory()));
+        $product = new Product(10.2);
 
         $this->assertEquals($product->getPrice(), 10.2);
-        $this->assertEquals($product->getType(), new ProductType('test', new ProductCategory()));
 
         $this->assertTrue(true);
     }

@@ -1,8 +1,5 @@
 <?php
 
-// tests/InitialPageTest.php
-namespace Tests\TDDIntro;
-
 use App\Entity\Clothing;
 use App\Entity\ProductCategory;
 
