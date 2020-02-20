@@ -2,109 +2,93 @@
 
 namespace App\Controller;
 
-use App\Entity\ProductType;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Product;
+use App\Form\ProductType;
+use App\Repository\ProductRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/product")
+ */
 class ProductController extends AbstractController
 {
     /**
-     * @Route("/products", name="show_all")
+     * @Route("/", name="product_index", methods={"GET"})
      */
-    public function showAll()
+    public function index(ProductRepository $productRepository): Response
     {
-        $repository = $this->getDoctrine()
-            ->getRepository(Product::class);
-        $products = $repository->findAll();
-
-//        var_dump($products);
-
-        if (!$products) {
-            throw $this->createNotFoundException(
-                'No products found.'
-            );
-        }
-//        return new Response('Check out this great product: ');
-
-         return $this->render('product/show_all.html.twig', ['products' => $products]);
-    }
-
-    /**
-     * @Route("/product/{id}", name="product_show")
-     */
-    public function show(Product $product)
-    {
-
-//        $product = $repository->find($id);
-
-//        // look for a single Product by name
-//        $product = $repository->findOneBy(['name' => 'Keyboard']);
-//        // or find by name and price
-//        $product = $repository->findOneBy([
-//            'name' => 'Keyboard',
-//            'price' => 1999,
-//        ]);
-//
-//        // look for multiple Product objects matching the name, ordered by price
-//        $products = $repository->findBy(
-//            ['name' => 'Keyboard'],
-//            ['price' => 'ASC']
-//        );
-
-//        $product = $this->getDoctrine()
-//            ->getRepository(Product::class)
-//            ->find($id);
-
-        if (!$product) {
-            throw $this->createNotFoundException(
-                'No product found for id '.$id
-            );
-        }
-
-        return new Response('Check out this great product: '.$product->getType()->getName());
-    }
-
-    /**
-     * @Route("/create", name="create_product")
-     */
-    public function createProduct(): Response
-    {
-        $entityManager = $this->getDoctrine()->getManager();
-
-        $product = new Product();
-        $type = $this->getDoctrine()->getRepository(ProductType::class)->find(1);
-
-        $product->setType($type);
-        $product->setPrice(19.99);
-
-        $entityManager->persist($product);
-
-        $entityManager->flush();
-
-        return new Response('Saved new product with id '.$product->getId());
-    }
-
-    /**
-     * @Route("/product/edit/{id}")
-     */
-    public function update($id)
-    {
-        $entityManager = $this->getDoctrine()->getManager();
-        $product = $entityManager->getRepository(Product::class)->find($id);
-
-        if (!$product) {
-            throw $this->createNotFoundException(
-                'No product found for id '.$id
-            );
-        }
-
-        $product->setName('New product name!');
-        $entityManager->flush();
-
-        return $this->redirectToRoute('product_show', [
-            'id' => $product->getId()
+        return $this->render('product/index.html.twig', [
+            'products' => $productRepository->findAll(),
         ]);
+    }
+
+    /**
+     * @Route("/new", name="product_new", methods={"GET","POST"})
+     */
+    public function new(Request $request): Response
+    {
+        $product = new Product();
+        $form = $this->createForm(ProductType::class, $product);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($product);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('product_index');
+        }
+
+        return $this->render('product/new.html.twig', [
+            'product' => $product,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="product_show", methods={"GET"})
+     */
+    public function show(Product $product): Response
+    {
+        return $this->render('product/show.html.twig', [
+            'product' => $product,
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/edit", name="product_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Product $product): Response
+    {
+        $form = $this->createForm(ProductType::class, $product);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('product_index');
+        }
+
+        return $this->render('product/edit.html.twig', [
+            'product' => $product,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="product_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, Product $product): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($product);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('product_index');
     }
 }

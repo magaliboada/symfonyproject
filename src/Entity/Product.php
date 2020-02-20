@@ -8,6 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\InheritanceType;
 use phpDocumentor\Reflection\Types\Float_;
 use phpDocumentor\Reflection\Types\Integer;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @InheritanceType("JOINED")
@@ -32,6 +34,7 @@ class Product
      */
     private $images;
 
+
     /**
      * @ORM\Column(type="array", nullable=true)
      * @param Float $price
@@ -49,6 +52,18 @@ class Product
         return $this->id;
     }
 
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setImage(File $file = null): self
+    {
+        $this->image = $file;
+
+        return $this;
+    }
+
     public function getPrice(): ?float
     {
         return $this->price;
@@ -61,9 +76,6 @@ class Product
         return $this;
     }
 
-    /**
-     * @return Collection|Image[]
-     */
     public function getImages(): Collection
     {
         return $this->images;

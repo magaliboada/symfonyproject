@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Clothing{% endblock %}
+
+{% block body %}
+    <h1>Clothing</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ clothing.id }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ clothing.price }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ clothing.image }}</td>
+            </tr>
+            <tr>
+                <th>Size</th>
+                <td>{{ clothing.size }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('clothing_index') }}">back to list</a>
+
+    <a href="{{ path('clothing_edit', {'id': clothing.id}) }}">edit</a>
+
+    {{ include('clothing/_delete_form.html.twig') }}
+{% endblock %}

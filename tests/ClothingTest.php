@@ -1,19 +1,17 @@
 <?php
 
-use App\Entity\Clothing;
-use App\Entity\ProductCategory;
+namespace App\Tests;
 
-class ClothingTest extends \PHPUnit\Framework\TestCase
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+
+class ClothingTest extends WebTestCase
 {
-    public function testClothingEntity()
+    public function testSomething()
     {
-        $clothing = new Clothing(10.2);
-        $clothing->setSize("XS");
+        $client = static::createClient();
+        $crawler = $client->request('GET', '/');
 
-        $this->assertEquals($clothing->getPrice(), 10.2);
-        $this->assertEquals($clothing->getSize(), "XS");
-
-        $this->assertTrue(true);
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorTextContains('h1', 'Hello World');
     }
-
 }
