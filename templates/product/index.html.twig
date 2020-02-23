@@ -10,7 +10,7 @@
             <tr>
                 <th>Id</th>
                 <th>Price</th>
-                <th>Image</th>
+                <th>Images</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -19,7 +19,7 @@
             <tr>
                 <td>{{ product.id }}</td>
                 <td>{{ product.price }}</td>
-                <td>{{ product.image }}</td>
+                <td>{{ product.images ? product.images|join(', ') : '' }}</td>
                 <td>
                     <a href="{{ path('product_show', {'id': product.id}) }}">show</a>
                     <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>

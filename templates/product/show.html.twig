@@ -16,8 +16,8 @@
                 <td>{{ product.price }}</td>
             </tr>
             <tr>
-                <th>Image</th>
-                <td>{{ product.image }}</td>
+                <th>Images</th>
+                <td>{{ product.images ? product.images|join(', ') : '' }}</td>
             </tr>
         </tbody>
     </table>

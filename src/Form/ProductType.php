@@ -13,7 +13,7 @@ class ProductType extends AbstractType
     {
         $builder
             ->add('price')
-            ->add('image')
+            ->add('images')
         ;
     }
 

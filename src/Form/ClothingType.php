@@ -6,6 +6,7 @@ use App\Entity\Clothing;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class ClothingType extends AbstractType
 {
@@ -13,7 +14,10 @@ class ClothingType extends AbstractType
     {
         $builder
             ->add('price')
-            ->add('image')
+            ->add('images', FileType::class, array(
+                'mapped' => false,
+                'multiple' => true
+            ))
             ->add('size')
         ;
     }

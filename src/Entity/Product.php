@@ -8,8 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\InheritanceType;
 use phpDocumentor\Reflection\Types\Float_;
 use phpDocumentor\Reflection\Types\Integer;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @InheritanceType("JOINED")
@@ -30,20 +31,16 @@ class Product
     private $price;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="product")
-     */
-    private $images;
-
-
-    /**
      * @ORM\Column(type="array", nullable=true)
-     * @param Float $price
      */
+    private $images = [];
 
-    public function __construct(Float $price = 0)
+
+
+    public function __construct(Float $price = 0, $images = array())
     {
         $this->setPrice($price);
-        $this->images = new ArrayCollection();
+        $this->images = [];
     }
 
 
@@ -52,17 +49,6 @@ class Product
         return $this->id;
     }
 
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    public function setImage(File $file = null): self
-    {
-        $this->image = $file;
-
-        return $this;
-    }
 
     public function getPrice(): ?float
     {
@@ -76,32 +62,17 @@ class Product
         return $this;
     }
 
-    public function getImages(): Collection
+    public function getImages(): ?array
     {
         return $this->images;
     }
 
-    public function addImage(Image $image): self
+    public function setImages(?array $images): self
     {
-        if (!$this->images->contains($image)) {
-            $this->images[] = $image;
-            $image->setProduct($this);
-        }
+        $this->images = $images;
 
         return $this;
     }
 
-    public function removeImage(Image $image): self
-    {
-        if ($this->images->contains($image)) {
-            $this->images->removeElement($image);
-            // set the owning side to null (unless already changed)
-            if ($image->getProduct() === $this) {
-                $image->setProduct(null);
-            }
-        }
-
-        return $this;
-    }
 
 }
